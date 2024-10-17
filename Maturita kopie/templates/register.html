@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="system-window">
+        <h1>Registrace</h1>
+        <form method="POST" action="{{ url_for('register') }}">
+            <input type="text" name="username" placeholder="Uživatelské jméno" required><br>
+            <input type="password" name="password" placeholder="Heslo" required><br>
+            <button type="submit" class="glow-btn">Zaregistrovat se</button>
+        </form>
+        <br><p>Už máš účet? <a href="{{ url_for('login') }}" class="glow-link">Přihlas se zde!</a></p></br>
+    </div>
+</body>
+</html>

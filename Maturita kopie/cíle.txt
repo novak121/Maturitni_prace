@@ -1,0 +1,10 @@
+1. CZ/ENG jazyk a přepnutí mezi nimi
+2. Tvorba svého účtu, profilu a nastavení profilového obrázku
+3. Ukazatel Levelu, exp, graf pokročení (progressu)
+4. ?? Registrace přes email, reset hesla následně může přijít také přes email ??
+5. Vizualizace a design podobné "systému" ze světa solo levelingu
+6. Žebříček uživatelů s nejvyšším levelem 
+7. "Daily questy", které pokud uživatel do 24h nesplní, tak bude potrestán
+8. Možnost, aby si uživatel mohl vytvořit svuj vlastní plán a to-do list
+9. Odemčení nových možností nebo odměny za level up
+10. V codu si důkladně poznamenat co je co a co určitá funkce dělá 

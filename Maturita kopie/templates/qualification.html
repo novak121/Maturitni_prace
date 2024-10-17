@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Kvalifikace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .pulse {
+            color: red;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="system-window">
+        <h1>Získal jsi kvalifikaci na to se stát <span class="pulse">Hráčem</span>. Přijímáte?</h1>
+        <div id="timer" style="font-size: 20px; margin-top: 20px;">10 sekund</div>
+        <button id="accept-btn" class="glow-btn">Přijímám</button>
+    </div>
+
+    <script>
+        let timeLeft = 10;
+        const timerElement = document.getElementById('timer');
+        const acceptButton = document.getElementById('accept-btn');
+
+        const countdown = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                window.location.href = "{{ url_for('login') }}"; // Přesměrování na přihlášení
+            } else {
+                timerElement.innerHTML = `${timeLeft} sekund`;
+            }
+            timeLeft -= 1;
+        }, 1000);
+
+        acceptButton.addEventListener('click', () => {
+            clearInterval(countdown);
+            window.location.href = "{{ url_for('home') }}"; // Přesměrování na domovskou stránku
+        });
+    </script>
+</body>
+</html>

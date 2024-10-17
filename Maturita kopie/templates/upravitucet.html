@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Úprava účtu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-color: #1c1c1c; /* Tmavé pozadí pro futuristický vzhled */
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .system-window {
+            background: rgba(30, 30, 30, 0.8); /* Poloprůhledné pozadí */
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+            animation: fadeIn 0.5s;
+        }
+
+        h1 {
+            color: #00ccff; /* Akcentační barva */
+            text-align: center;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #00ccff; /* Rám kolem inputu */
+            background: #2c2c2c; /* Tmavé pozadí pro inputy */
+            color: #fff; /* Bílý text */
+        }
+
+        .button {
+            background-color: #00ccff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: #0099cc; /* Tmavší barva při hover */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="system-window">
+        <h1>Úprava účtu</h1>
+        
+        <form method="post" enctype="multipart/form-data">
+            <label for="nickname">Přezdívka:</label>
+            <input type="text" id="nickname" name="nickname" value="{{ nickname }}">
+
+            <label for="about">O mně:</label>
+            <textarea id="about" name="about">{{ about }}</textarea>
+
+            <label for="avatar">Vyber avatara:</label>
+            <input type="file" id="avatar" name="avatar">
+
+            <button type="submit" class="button">Uložit změny</button>
+        </form>
+        
+        <a href="{{ url_for('ucet') }}" class="button">Zpět na účet</a>
+    </div>
+</body>
+</html>

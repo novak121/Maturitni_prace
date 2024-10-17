@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Účet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            overflow-y: auto; /* Povolit vertikální posouvání */
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            background-color: #0e0e19; /* Temné pozadí */
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -200px;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: rise 20s infinite;
+            background: rgba(0, 102, 204, 0.8);
+            filter: blur(8px);
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateX(0) scale(1);
+            }
+            100% {
+                transform: translateX(100px) translateY(-1500px) scale(0.5);
+            }
+        }
+
+        /* Generování bublin */
+        .bubble:nth-child(1) { width: 50px; height: 50px; left: 10%; animation-duration: 10s; }
+        .bubble:nth-child(2) { width: 80px; height: 80px; left: 20%; animation-duration: 15s; }
+        .bubble:nth-child(3) { width: 60px; height: 60px; left: 30%; animation-duration: 20s; }
+        .bubble:nth-child(4) { width: 100px; height: 100px; left: 40%; animation-duration: 25s; }
+        .bubble:nth-child(5) { width: 70px; height: 70px; left: 50%; animation-duration: 18s; }
+        .bubble:nth-child(6) { width: 90px; height: 90px; left: 60%; animation-duration: 22s; }
+        .bubble:nth-child(7) { width: 40px; height: 40px; left: 70%; animation-duration: 12s; }
+        .bubble:nth-child(8) { width: 110px; height: 110px; left: 80%; animation-duration: 30s; }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #003366, #001a33);
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            position: relative;
+            border: 1px solid rgba(0, 90, 255, 0.2); /* Tenký tmavě modrý border */
+            color: white;
+            z-index: 1; /* Zajišťuje, že se container zobrazí nad pozadím */
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0077ff, #0059ff);
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 45, 90, 0.7);
+            border-radius: 15px;
+            animation: profileGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes profileGlow {
+            0% { box-shadow: 0 0 10px #0033cc, 0 0 20px #001a66; }
+            100% { box-shadow: 0 0 20px #0055ff, 0 0 40px #0033cc; }
+        }
+
+        .photo-border {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(0, 102, 204, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .photo-border img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-details h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #00ccff;
+        }
+
+        .profile-details p {
+            font-size: 1.2em;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .account-info {
+            padding: 20px;
+            background: rgba(0, 45, 90, 0.7);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .account-info form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .account-info label {
+            font-size: 1em;
+            color: #ccc;
+        }
+
+        .account-info input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #0059ff;
+            border-radius: 5px;
+            background-color: #001a33;
+            color: white;
+        }
+
+        .glow-btn {
+            background-color: #001eff77;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+
+        .glow-btn:hover {
+            background-color: #0077ff;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-links a {
+            color: #0400ff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .social-links a:hover {
+            color: #0099cc;
+        }
+
+        /* Space for extra content */
+        .extra-content {
+            margin-top: 40px;
+            text-align: center;
+            color: #ccc;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Profil uživatele</h1>
+        </div>
+
+        <div class="profile-info">
+            <div class="photo-border">
+                {% if avatar %}
+                    <img src="{{ url_for('static', filename='avatars/' + avatar) }}" >
+                {% else %}
+                    <img src="{{ url_for('static', filename='default-avatar.png') }}">
+                {% endif %}
+            </div>
+            <div class="profile-details">
+                <h2>{{ nickname }}</h2>
+                <p>O mně: {{ about }}</p>
+                <p>Level: {{ level }}</p>
+                <p>Exp: {{ exp }}</p>
+            </div>
+        </div>
+
+        <br>
+        <div class="account-info">
+            <h3>Informace o účtu</h3>
+            <form action="{{ url_for('upravit_ucet') }}" method="POST">
+                <br>
+                <p id="accinfotext">datum vytvoreni idk asi</p>
+                <br>
+                <br>
+                <label for="nickname">Nová přezdívka:</label>
+                <input type="text" id="nickname" name="nickname" required>
+                <button type="submit" class="glow-btn">Uložit změny</button>
+            </form>
+        </div>
+        <br>
+        <div class="extra-content">
+            <p>dalsi text soon</p>
+        </div>
+
+        <div class="button-container">
+            <a href="{{ url_for('home') }}" class="glow-btn">Zpět na domovskou stránku</a>
+            <a href="{{ url_for('upravit_ucet') }}" class="glow-btn">Upravit účet</a>
+            <a href="{{ url_for('logout') }}" class="glow-btn">Odhlásit se</a>
+        </div>
+
+        <div class="social-links">
+            <h3>Sociální sítě</h3>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+    </div>
+</body>
+</html>
+
