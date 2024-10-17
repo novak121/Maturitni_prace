@@ -1,10 +1,13 @@
-1. CZ/ENG jazyk a přepnutí mezi nimi
+1. CZ/ENG jazyk a přepnutí mezi nimi?? Asi ne
 2. Tvorba svého účtu, profilu a nastavení profilového obrázku
 3. Ukazatel Levelu, exp, graf pokročení (progressu)
-4. ?? Registrace přes email, reset hesla následně může přijít také přes email ??
+4. ?? Registrace přes email, reset hesla následně může přijít také přes email ?? Asi taky ne
 5. Vizualizace a design podobné "systému" ze světa solo levelingu
-6. Žebříček uživatelů s nejvyšším levelem 
-7. "Daily questy", které pokud uživatel do 24h nesplní, tak bude potrestán
+6. Žebříček uživatelů s nejvyšším levelem (SQLite)
+7. "Daily questy", které pokud uživatel do 24h nesplní, tak bude potrestán (Javascript)
 8. Možnost, aby si uživatel mohl vytvořit svuj vlastní plán a to-do list
 9. Odemčení nových možností nebo odměny za level up
 10. V codu si důkladně poznamenat co je co a co určitá funkce dělá 
+
+
+https://youtu.be/Z1RJmh_OqeA?feature=shared - udelat na zdroje textovej soubor aby v tom nebyl bordel pozdeji
